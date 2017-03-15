@@ -13,10 +13,12 @@
 		6E5FAAF61E77355300172E0E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAAF51E77355300172E0E /* GameScene.swift */; };
 		6E5FAAF81E77355300172E0E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAAF71E77355300172E0E /* GameViewController.swift */; };
 		6E5FAAFB1E77355300172E0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E5FAAF91E77355300172E0E /* Main.storyboard */; };
-		6E5FAAFD1E77355300172E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E5FAAFC1E77355300172E0E /* Assets.xcassets */; };
 		6E5FAB001E77355300172E0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E5FAAFE1E77355300172E0E /* LaunchScreen.storyboard */; };
 		6E5FAB0B1E77355400172E0E /* DriftismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAB0A1E77355400172E0E /* DriftismTests.swift */; };
 		6E5FAB161E77355400172E0E /* DriftismUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAB151E77355400172E0E /* DriftismUITests.swift */; };
+		6EAD0F5B1E78C9A300FDB8BB /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */; };
+		6EAD0F5D1E78E13B00FDB8BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EAD0F5C1E78E13B00FDB8BB /* Assets.xcassets */; };
+		6EAD0F611E79926D00FDB8BB /* tireSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +46,6 @@
 		6E5FAAF51E77355300172E0E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		6E5FAAF71E77355300172E0E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		6E5FAAFA1E77355300172E0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6E5FAAFC1E77355300172E0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E5FAAFF1E77355300172E0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E5FAB011E77355300172E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E5FAB061E77355400172E0E /* DriftismTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriftismTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +54,9 @@
 		6E5FAB111E77355400172E0E /* DriftismUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriftismUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5FAB151E77355400172E0E /* DriftismUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftismUITests.swift; sourceTree = "<group>"; };
 		6E5FAB171E77355400172E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
+		6EAD0F5C1E78E13B00FDB8BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = tireSmoke.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +107,15 @@
 		6E5FAAEE1E77355300172E0E /* Driftism */ = {
 			isa = PBXGroup;
 			children = (
+				6EAD0F5C1E78E13B00FDB8BB /* Assets.xcassets */,
 				6E5FAAEF1E77355300172E0E /* AppDelegate.swift */,
 				6E5FAAF11E77355300172E0E /* GameScene.sks */,
 				6E5FAAF31E77355300172E0E /* Actions.sks */,
 				6E5FAAF51E77355300172E0E /* GameScene.swift */,
 				6E5FAAF71E77355300172E0E /* GameViewController.swift */,
 				6E5FAAF91E77355300172E0E /* Main.storyboard */,
-				6E5FAAFC1E77355300172E0E /* Assets.xcassets */,
+				6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */,
+				6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */,
 				6E5FAAFE1E77355300172E0E /* LaunchScreen.storyboard */,
 				6E5FAB011E77355300172E0E /* Info.plist */,
 			);
@@ -202,6 +208,7 @@
 				TargetAttributes = {
 					6E5FAAEB1E77355300172E0E = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 37QCMVR8PS;
 						ProvisioningStyle = Automatic;
 					};
 					6E5FAB051E77355400172E0E = {
@@ -242,10 +249,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E5FAAFB1E77355300172E0E /* Main.storyboard in Resources */,
+				6EAD0F611E79926D00FDB8BB /* tireSmoke.sks in Resources */,
 				6E5FAAF21E77355300172E0E /* GameScene.sks in Resources */,
-				6E5FAAFD1E77355300172E0E /* Assets.xcassets in Resources */,
 				6E5FAB001E77355300172E0E /* LaunchScreen.storyboard in Resources */,
 				6E5FAAF41E77355300172E0E /* Actions.sks in Resources */,
+				6EAD0F5D1E78E13B00FDB8BB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E5FAAF61E77355300172E0E /* GameScene.swift in Sources */,
+				6EAD0F5B1E78C9A300FDB8BB /* Joystick.swift in Sources */,
 				6E5FAAF81E77355300172E0E /* GameViewController.swift in Sources */,
 				6E5FAAF01E77355300172E0E /* AppDelegate.swift in Sources */,
 			);
@@ -422,7 +431,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 37QCMVR8PS;
 				INFOPLIST_FILE = Driftism/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cyrus.Driftism;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,7 +446,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 37QCMVR8PS;
 				INFOPLIST_FILE = Driftism/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cyrus.Driftism;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,6 +530,7 @@
 				6E5FAB1C1E77355400172E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E5FAB1D1E77355400172E0E /* Build configuration list for PBXNativeTarget "DriftismTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +539,7 @@
 				6E5FAB1F1E77355400172E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E5FAB201E77355400172E0E /* Build configuration list for PBXNativeTarget "DriftismUITests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +548,7 @@
 				6E5FAB221E77355400172E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
