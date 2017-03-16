@@ -17,18 +17,19 @@ func ^^ (radix: Double, power: Double) -> Double {
 }
 
 class GameScene: SKScene {
-    
+    // control sticks
     let steerStick =  🕹(diameter: 200), throttleStick =  🕹(diameter: 200)
-
+    // carBody
     private var carBody : SKNode?, wheelFL : SKNode?, wheelFR : SKNode?, wheelRR : SKNode?, wheelRL : SKNode?
-    
+    // smoke emitters
     private var smokeRR : SKEmitterNode?, smokeRL : SKEmitterNode?
-    
+    // camera
     private var cam: SKCameraNode?
-    
+    // state variables
     private var x: [Double] = []
-    
-    private var m: Double = 0.0, L: Double = 0.0, a: Double = 0.0, b: Double = 0.0, G_f: Double = 0.0, G_r: Double = 0.0, C_a: Double = 0.0, C_x: Double = 0.0, I_z: Double = 0.0, mu: Double = 0.0, mu_s: Double = 0.0, scaleFactor: Double = 0.0
+    private var rpm_t: Double = 0.0
+    // car parameters
+    private var m: Double = 0.0, L: Double = 0.0, a: Double = 0.0, b: Double = 0.0, G_f: Double = 0.0, G_r: Double = 0.0, C_a: Double = 0.0, C_x: Double = 0.0, I_z: Double = 0.0, mu: Double = 0.0, mu_s: Double = 0.0, scaleFactor: Double = 0.0, power : [Double] = [0,0,0], rpm : [Double] = [0,0]
     
     private var lastUpdateTime : TimeInterval?
     
@@ -41,7 +42,7 @@ class GameScene: SKScene {
     }
     
     func createScene() {
-        self.x = Array(repeating: 0.0, count:6)
+        self.x = Array(repeating: 0.0, count:7)
         
         // Get carBody node from scene and store it for use later
         self.carBody = self.childNode(withName: "carBody")
@@ -51,7 +52,7 @@ class GameScene: SKScene {
         self.wheelRR = self.carBody?.childNode(withName: "wheelRR")
         self.wheelRL = self.carBody?.childNode(withName: "wheelRL")
         
-        setCarParam(m: 2010, L: 2.45, a: 1.47, C_a: 1200000, C_x: 200000, I_z: 3994, mu: 0.75, mu_s: 0.6)
+        setCarParam(m: 2010, L: 2.45, a: 1.47, C_a: 1200000, C_x: 200000, I_z: 3994, mu: 0.75, mu_s: 0.6, power:[0, 397*10^^3, 320*10^^3], rpm:[5000, 8000])
         
         let path = Bundle.main.path(forResource: "tireSmoke", ofType: "sks")
         smokeRR = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode
@@ -89,7 +90,7 @@ class GameScene: SKScene {
         sceneCreated = true
     }
     
-    func setCarParam(m:Double, L:Double, a:Double, C_a:Double, C_x:Double, I_z:Double, mu:Double, mu_s:Double) {
+    func setCarParam(m:Double, L:Double, a:Double, C_a:Double, C_x:Double, I_z:Double, mu:Double, mu_s:Double, power:[Double], rpm:[Double]) {
         let g = 9.81
         
         self.m = m
@@ -107,6 +108,10 @@ class GameScene: SKScene {
         self.I_z = I_z
         
         self.scaleFactor = Double(convert((wheelFL?.position)!, from: carBody!).x - convert((wheelRL?.position)!, from: carBody!).x) / L
+        
+        self.power = power
+        self.rpm = rpm
+        
     }
     
     func sign(_ a: Double) -> Double{
@@ -165,6 +170,31 @@ class GameScene: SKScene {
             Fy = -C_a/gamma * (tan(alpha)/(1+K)) * F
         }
         return (Fx,Fy)
+    }
+    
+    func powerOutput(rpm_t:Double) -> Double{
+        if rpm_t < 0 {
+            return -powerOutput(rpm_t: -rpm_t)
+        }
+        
+        let x = rpm_t
+        let x1 = 0.0
+        let x2 = rpm[0]
+        let x3 = rpm[1]
+
+        let y1 = power[0]
+        let y2 = power[1]
+        let y3 = power[2]
+
+        let d1 = x-x1
+        let d2 = x-x2
+        let d3 = x-x3
+
+        let a1 = (d1*d2)/((x3-x1)*(x3-x2))*y3
+        let a2 = (d1*d3)/((x2-x1)*(x2-x3))*y2
+        let a3 = (d2*d3)/((x1-x2)*(x1-x3))*y1
+
+        return a1+a2+a3
     }
     
     func dynamic(x: inout [Double], u: [Double], dt: Double) {
@@ -238,7 +268,7 @@ class GameScene: SKScene {
         Uy = Uy + dUy*dt
         r = r + dr*dt
         
-        x = [pos_x, pos_y, pos_phi, Ux, Uy, r]
+        x = [pos_x, pos_y, pos_phi, Ux, Uy, r, Fx_R]
     }
     
     
@@ -273,16 +303,25 @@ class GameScene: SKScene {
         self.cam?.run(SKAction.move(to: CGPoint(x:self.x[0], y:self.x[1]), duration: 0.5))
         
         
-        let steer = -steerStick.data.velocity.x * 0.6
+        let steer = -steerStick.data.velocity.x * 1.0
         
-        let vel = throttleStick.data.velocity.y
+        let vel = throttleStick.data.velocity.y * 80
         
-        let thr = vel>0 ? vel*30 : vel*10
+        rpm_t = min(max(rpm_t+Double(vel),-1000),8000)
         
+        let F = x[6]==0 ? G_r*mu : x[6]
+        var thr = powerOutput(rpm_t: rpm_t) / abs(F)
+        print("rpm: \(rpm_t), wheel_speed: \(thr), Ux: \(x[3])")
         if let lastUpdateTime = self.lastUpdateTime {
-            let dt = currentTime - lastUpdateTime
+        let dt = currentTime - lastUpdateTime
+            if vel <= 8 {
+                let Ux = x[3]
+                thr = abs(Ux)>1 ? sign(Ux)*(abs(Ux)-1) : 0
+            }
             dynamic(x: &self.x, u: [Double(thr), Double(steer)], dt: dt)
         }
+        
+        rpm_t = abs(rpm_t)>50 ? sign(rpm_t)*(abs(rpm_t)-50) : 0
         
         self.lastUpdateTime = currentTime
         
