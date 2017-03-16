@@ -32,8 +32,15 @@ class GameScene: SKScene {
     
     private var lastUpdateTime : TimeInterval?
     
+    private var sceneCreated : Bool = false
+    
     override func didMove(to view: SKView) {
-
+        if !sceneCreated {
+            createScene()
+        }
+    }
+    
+    func createScene() {
         self.x = Array(repeating: 0.0, count:6)
         
         // Get carBody node from scene and store it for use later
@@ -60,7 +67,7 @@ class GameScene: SKScene {
             carBody.alpha = 0.0
             carBody.run(SKAction.fadeIn(withDuration: 2.0))
         }
-
+        
         
         self.cam = childNode(withName: "cameraNode") as? SKCameraNode
         self.camera = self.cam
@@ -78,6 +85,8 @@ class GameScene: SKScene {
         
         self.cam?.addChild(steerStick)
         self.cam?.addChild(throttleStick)
+        
+        sceneCreated = true
     }
     
     func setCarParam(m:Double, L:Double, a:Double, C_a:Double, C_x:Double, I_z:Double, mu:Double, mu_s:Double) {
@@ -137,7 +146,7 @@ class GameScene: SKScene {
         }
         
         if abs(alpha) > pi/2 {
-            alpha = (abs(alpha)-pi/2)*sign(alpha)
+            alpha = (pi-abs(alpha))*sign(alpha)
         }
         
         gamma = sqrt(C_x^^2 * (K/(1+K))^^2 + C_a^^2 * (tan(alpha)/(1+K))^^2);
