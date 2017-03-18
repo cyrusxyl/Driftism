@@ -22,7 +22,7 @@ class GameScene: SKScene {
 
     private var carBody : SKNode?, wheelFL : SKNode?, wheelFR : SKNode?, wheelRR : SKNode?, wheelRL : SKNode?
     
-    private var smokeRR : SKEmitterNode?, smokeRL : SKEmitterNode?
+    private var smoke : SKEmitterNode?
     
     private var cam: SKCameraNode?
     
@@ -53,20 +53,30 @@ class GameScene: SKScene {
         
         setCarParam(m: 2010, L: 2.45, a: 1.47, C_a: 1200000, C_x: 200000, I_z: 3994, mu: 0.75, mu_s: 0.6)
         
-        let path = Bundle.main.path(forResource: "tireSmoke", ofType: "sks")
-        smokeRR = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode
-        smokeRL = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode
         
-        smokeRR?.targetNode = self
-        smokeRL?.targetNode = self
-        
-        wheelRR?.addChild(smokeRR!)
-        wheelRL?.addChild(smokeRL!)
         
         if let carBody = self.carBody {
             carBody.alpha = 0.0
             carBody.run(SKAction.fadeIn(withDuration: 2.0))
         }
+        
+        self.smoke = SKEmitterNode(fileNamed: "tireSmoke.sks")
+//        smoke?.particleAlphaSequence = SKKeyframeSequence(keyframeValues: [0.2, 0.4, 0.0],
+//                                                          times: [0.0, 0.2, 1])
+        
+        smoke?.position = CGPoint(x:-180, y: 0)
+        smoke?.targetNode = self
+        carBody?.addChild(smoke!)
+        
+        let traceFL = newTraceEmitter()
+        let traceFR = newTraceEmitter()
+        let traceRR = newTraceEmitter()
+        let traceRL = newTraceEmitter()
+        
+        wheelFL?.addChild(traceFL!)
+        wheelFR?.addChild(traceFR!)
+        wheelRL?.addChild(traceRR!)
+        wheelRR?.addChild(traceRL!)
         
         
         self.cam = childNode(withName: "cameraNode") as? SKCameraNode
@@ -87,6 +97,13 @@ class GameScene: SKScene {
         self.cam?.addChild(throttleStick)
         
         sceneCreated = true
+    }
+    
+    func newTraceEmitter() -> SKEmitterNode? {
+        let trace = SKEmitterNode(fileNamed: "tireTrace.sks")
+        trace?.targetNode = self
+        trace?.zPosition = -1
+        return trace
     }
     
     func setCarParam(m:Double, L:Double, a:Double, C_a:Double, C_x:Double, I_z:Double, mu:Double, mu_s:Double) {
@@ -152,9 +169,9 @@ class GameScene: SKScene {
         gamma = sqrt(C_x^^2 * (K/(1+K))^^2 + C_a^^2 * (tan(alpha)/(1+K))^^2);
         
         if gamma <= 3*mu*Fz {
-            F = gamma - 1/(3*mu*Fz)*gamma^^2 + 1/(27*mu^^2*Fz^^2)*gamma^^3
+            F = gamma - 1/(3*mu*Fz)*(2-mu_s/mu)*gamma^^2 + 1/(9*mu^^2*Fz^^2)*(1-(2/3)*(mu_s/mu))*gamma^^3
         } else {
-            F = (mu_s + (mu-mu_s)/(1 + ((gamma-3*mu*Fz)/27)^^2))*Fz;
+            F = mu_s*Fz
         }
         
         if gamma == 0 {
@@ -237,7 +254,7 @@ class GameScene: SKScene {
         Ux = Ux + dUx*dt
         Uy = Uy + dUy*dt
         r = r + dr*dt
-        
+    
         x = [pos_x, pos_y, pos_phi, Ux, Uy, r]
     }
     
@@ -260,7 +277,7 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(x)
+        self.cam?.run(SKAction.move(to: CGPoint(x:self.x[0], y:self.x[1]), duration: 0.5))
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
@@ -272,7 +289,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         self.cam?.run(SKAction.move(to: CGPoint(x:self.x[0], y:self.x[1]), duration: 0.5))
         
-        
+        smoke?.emissionAngle = (carBody?.zRotation)!
         let steer = -steerStick.data.velocity.x * 0.6
         
         let vel = throttleStick.data.velocity.y

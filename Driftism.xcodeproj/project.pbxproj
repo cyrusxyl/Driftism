@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E00E4391E7C8A37004C2B28 /* tireTrace.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E00E4381E7C8A37004C2B28 /* tireTrace.sks */; };
+		6E00E43B1E7CB96A004C2B28 /* tireSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E00E43A1E7CB96A004C2B28 /* tireSmoke.sks */; };
 		6E5FAAF01E77355300172E0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAAEF1E77355300172E0E /* AppDelegate.swift */; };
 		6E5FAAF21E77355300172E0E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E5FAAF11E77355300172E0E /* GameScene.sks */; };
 		6E5FAAF41E77355300172E0E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E5FAAF31E77355300172E0E /* Actions.sks */; };
@@ -18,7 +20,6 @@
 		6E5FAB161E77355400172E0E /* DriftismUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FAB151E77355400172E0E /* DriftismUITests.swift */; };
 		6EAD0F5B1E78C9A300FDB8BB /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */; };
 		6EAD0F5D1E78E13B00FDB8BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EAD0F5C1E78E13B00FDB8BB /* Assets.xcassets */; };
-		6EAD0F611E79926D00FDB8BB /* tireSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E00E4381E7C8A37004C2B28 /* tireTrace.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = tireTrace.sks; sourceTree = "<group>"; };
+		6E00E43A1E7CB96A004C2B28 /* tireSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = tireSmoke.sks; sourceTree = "<group>"; };
 		6E5FAAEC1E77355300172E0E /* Driftism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Driftism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5FAAEF1E77355300172E0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E5FAAF11E77355300172E0E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -56,7 +59,6 @@
 		6E5FAB171E77355400172E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		6EAD0F5C1E78E13B00FDB8BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = tireSmoke.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,8 @@
 				6E5FAAF51E77355300172E0E /* GameScene.swift */,
 				6E5FAAF71E77355300172E0E /* GameViewController.swift */,
 				6E5FAAF91E77355300172E0E /* Main.storyboard */,
-				6EAD0F601E79926D00FDB8BB /* tireSmoke.sks */,
+				6E00E4381E7C8A37004C2B28 /* tireTrace.sks */,
+				6E00E43A1E7CB96A004C2B28 /* tireSmoke.sks */,
 				6EAD0F5A1E78C9A300FDB8BB /* Joystick.swift */,
 				6E5FAAFE1E77355300172E0E /* LaunchScreen.storyboard */,
 				6E5FAB011E77355300172E0E /* Info.plist */,
@@ -248,12 +251,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E00E43B1E7CB96A004C2B28 /* tireSmoke.sks in Resources */,
 				6E5FAAFB1E77355300172E0E /* Main.storyboard in Resources */,
-				6EAD0F611E79926D00FDB8BB /* tireSmoke.sks in Resources */,
 				6E5FAAF21E77355300172E0E /* GameScene.sks in Resources */,
 				6E5FAB001E77355300172E0E /* LaunchScreen.storyboard in Resources */,
 				6E5FAAF41E77355300172E0E /* Actions.sks in Resources */,
 				6EAD0F5D1E78E13B00FDB8BB /* Assets.xcassets in Resources */,
+				6E00E4391E7C8A37004C2B28 /* tireTrace.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
